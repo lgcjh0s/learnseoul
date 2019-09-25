@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+    <head>
+	    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+	    <title>배움, 서울</title>
+	    <link rel="stylesheet" type="text/css" href="./css/common.css" />
+		<style type="text/css">
+			.inner p{line-height:40px;font-size:14px;}
+		</style>
+    </head>    
+    <body>
+    <div class="wrap">
+		<header>
+			<div>
+				<div class="title">
+					<img src="./img/app_logo.png" height="50px" />
+				</div>
+			</div>
+		</header>
+    	<div class="body">
+    		<div class="inner" style="text-align:center;">
+				<div class="pa10">
+					<p>서울시에서 진행하는 다양한 교육 콘텐츠를</p>
+					<p>조회하고 예약할 수 있습니다.</p>
+				</div>
+				<div class="pa10">
+					<div style="background-color:#dc2e5a;border-top:1px solid #DDD;text-align:center;height:40px;line-height:40px;">
+						<a href="#" id="start" style="color:#FFF;">앱 시작하기</a>
+					</div>
+				</div>
+    		</div>
+		</div>
+		<footer>
+			<div id="download" style="background-color:#dc2e5a;text-align:center;height:60px;line-height:60px;color:#fff;">
+			앱 설치하기 (Google PlayStore 이동)
+			</div>
+		</footer>
+	</div>	
+    </body>
+    <script type="text/javascript" charset="utf-8" src="./script/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+		function getParameter(param) {
+
+			var url = decodeURIComponent(location.href);
+			var paramArr = (url.substring(url.indexOf('?') + 1, url.length)).split('&');
+			var requestParam = '';
+
+			for (var inx=0; inx<paramArr.length; inx++) {
+				var temp = paramArr[inx].split('=');
+				if (temp[0].toUpperCase() == param.toUpperCase()) {
+					requestParam = temp[1];
+					break;
+				}
+			}
+
+			return requestParam;
+		}
+
+		var link = 'intent://link?svcid={svcid}#Intent;scheme=learnseoul;package=com.oneteam.seoul.learnapp;end';
+		$(document).ready(function() {
+
+			var svcId = getParameter('svcid');
+			link = link.replace('{svcid}', svcId);
+
+			if (svcId && svcId != '') {
+				setTimeout(function() {
+					location.href = link;
+				}, 500);
+			}
+
+			$('#start').on('click', function() {
+				location.href = link;
+			});
+
+			$('#download').on('click', function() {
+				location.href = 'learnseoul.apk';
+			});
+		});
+	</script>
+</html>
